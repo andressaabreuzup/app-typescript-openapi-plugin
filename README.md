@@ -1,0 +1,1 @@
+# app-typescript-openapi-plugin
