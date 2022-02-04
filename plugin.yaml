@@ -1,0 +1,19 @@
+name: domain-services-typescript-openapi-plugin
+description: Plugin that applies contract first driven by an OpenAPI contract and auto generate source codes for lambdas and the nested CDK infrastructure
+types:
+  - app
+inputs:
+  - label: Input Example
+    type: text
+    name: example
+    default: any text
+  - label: Example of number
+    type: int
+    name: any_number
+    default: "10"
+  - label: Example of list
+    type: multiselect
+    name: any_list
+    items:
+      - item1
+      - item2
