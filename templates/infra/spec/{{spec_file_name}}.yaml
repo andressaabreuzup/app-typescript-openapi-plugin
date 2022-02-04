@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: {{api_name}}
+  version: '1.0'
+  description: A simple hello-world REST service
+  contact:
+    email: email@email.com
+servers:
+  - url: 'http://localhost:3000'
+tags:
+  - name: hello
+    description: Hello world services
+paths:
+  /hello:
+    post:
+      tags:
+        - hello
+      description: Receive a name in request body and respond with a greeting message for the name informed
+      operationId: post-hello
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HelloResponse'
+              examples:
+                example-1:
+                  value:
+                    greeting: Hello User!
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HelloRequest'
+            examples:
+              example-1:
+                value:
+                  name: User
+components:
+  schemas:
+    HelloRequest:
+      title: HelloRequest
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name
+    HelloResponse:
+      title: HelloResponse
+      type: object
+      properties:
+        greeting:
+          type: string
+      required:
+        - greeting
