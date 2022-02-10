@@ -23,7 +23,7 @@ inputs:
     name: jwks_uri
     required: false
   - label: If the contract to be worked with this plugin is already exposed on an API Gateway, this field should be informed with the entrypoint by each environment, dev, qa, prod, and so on, if not informed, an API Gateway CDK Implementation will be generated.
-    type: text
+    type: bool
     name: virtualize_gateway
     default: true
     required: false
