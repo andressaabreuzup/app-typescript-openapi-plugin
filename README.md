@@ -13,6 +13,7 @@
   - [Configuração Catalogo CLI](#Configuração-Catalogo-CLI)
     - [Verificacao template e plugin](#Verificacao_template_e_plugin)
   - [Instalacao](#Instalacao)
+- [Tutorial](#Tutorial)
 - [Useful commands](#Useful-commands)
 - [Next Steps](#Next-steps)
 
@@ -24,7 +25,7 @@ Durante a aplicação do plugin é gerado o código lambda baseado na especifica
 
 ## Uso
 Nessa seção mostra como é feita a utilização do plugin por meio do CLI, criando uma aplicação baseada no template [**app-typescript-template**](https://github.com/stack-spot/app-typescript-template)  
-Após a criação da aplicação é possível aplicar o plugin [x]()  
+Após a criação da aplicação é possível aplicar o plugin **app-typescript-openapi-plugin**  
 
 ### Pre-requisitos
 Necessário a configuração de alguns pré-requisitos para utilização do plugin.  
