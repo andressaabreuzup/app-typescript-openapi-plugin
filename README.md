@@ -1,49 +1,104 @@
-## Descrição
-O plugin Typescript OpenAPI permite a criação de Lambda com base em um arquivo de especificação OpenAPI.
-
-- **Descrição:** Adicione uma descrição curta sobre o que é o plugin.  
-  O plugin xxx é um xxx e permite xxx.
-
-- **Categoria:** ?Insira a categoria.?
-- **Stack:** ?Lambda?
+- **Descrição:** O plugin Typescript OpenAPI permite a criação de Lambda com base em um arquivo de especificação OpenAPI.
+- **Categoria:** App
+- **Stack:** Lambda
 - **Criado em:** 11/02/2022
 - **Última atualização:** 11/02/2022
 - **Download:** [app-typescript-openapi-plugin](https://github.com/stack-spot/app-typescript-openapi-plugin)
 
-## Visão Geral
-### Typescript OpenAPI Plugin
-Insira um resumo do plugin. Responda as perguntas: o que ele faz e como funciona.  
-Sugerimos um texto para você iniciar:  
-O **xx plugin** é um serviço de filas e permite a escalabilidade de microserviços.
+# Indice
+- [Visao Geral](#Visao-Geral)
+- [Uso](#Uso)
+  - [Pre-requisitos](#Pre-requisitos)
+  - [Recomendado](#Recomendado)
+  - [Configuração Catalogo CLI](#Configuração-Catalogo-CLI)
+    - [Verificacao template e plugin](#Verificacao_template_e_plugin)
+  - [Instalacao](#Instalacao)
+- [Useful commands](#Useful-commands)
+- [Next Steps](#Next-steps)
 
+## Visao Geral
 ### Como Typescript OpenAPI Plugin funciona
-Explique como esse plugin funciona e adicione imagens/infográficos/diagramas da arquitetura para facilitar a compreensão.
+Por meio das linhas de comando StackSpot é possível aplicar o plugin em uma aplicação do tipo APP  
+Ao realizar a aplicação o template de _construct_ cdk é criado na aplicação, utilizando o componente `@stackspot/cdk-component-openapi-typescript`  
+Durante a aplicação do plugin é gerado o código lambda baseado na especificação OpenAPI definida no arquivo `infra/spec/{{spec_file_name}}.yaml`
 
 ## Uso
-TODO  
+Nessa seção mostra como é feita a utilização do plugin por meio do CLI, criando uma aplicação baseada no template [**app-typescript-template**](https://github.com/stack-spot/app-typescript-template)  
+Após a criação da aplicação é possível aplicar o plugin [x]()  
 
-### Pré-requisitos
-Adicione os pré-requisitos que a pessoa usuária precisa ter antes de utilizar o plugin.
+### Pre-requisitos
+Necessário a configuração de alguns pré-requisitos para utilização do plugin.  
+- [**Instalação StakSpot CLI**](https://docs.stackspot.com/v3.0.0/os-cli/installation/)
+- [**NodeJS**](https://nodejs.org/en/)
+- [**Git**](https://git-scm.com/)
+- [**AWS CLI**](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
+- [**CDK**](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html)
 
-Para utilizar esse plugin, é necessário:
-- [**GitHub**](www.github.com)
-- [**adicione a ferramenta**](Link.com)
+### Recomendado
+Recomendamos a utilização de algumas ferramentas para desenvolvimento  
+- [**LocalStack**](https://github.com/localstack/localstack)
 
-### Instalação
-Nesta subseção, adicione a URL de download e coloque os passos para a instalação, se necessário.
-
-Para fazer o download do **plugin xx**, siga os passos abaixo:
-
-**Passo 1.** Copie e cole a URL abaixo no seu navegador/terminal:
+### Configuração Catalogo CLI
+Executar comando abaixo para atualização de local com catálogo que contém OpenAPI plugin:  
 ```
-url plugin
+os add catalog https://github.com/stack-spot/skynet-typescript-catalog
 ```
-**Passo 2.** xxx
 
-## Configuração
-Nesta subseção, é necessário adicionar as informações das configurações que a pessoa usuária precisa fazer para utilizar o plugin.
+#### Verificacao template e plugin
+Executando os comandos abaixo é possível verificar que o catálogo foi carregado localmente  
+**Listagem plugin disponíveis localmente:**
+```
+os list plugin
+```
+
+**Exemplo output:**
+```
+Catalog: skynet-typescript-catalog
++-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
+| name                              | description                                                                               | types   | version(latest) |
++-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
+| app-typescript-openapi-plugin     | Plugin that applies contract first driven by an OpenAPI contract and auto generate source | ['app'] | 0.1.0           |
+|                                   | codes for lambdas and the nested CDK infrastructure                                       |         |                 |
+|                                   |                                                                                           |         |                 |
++-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
+```
+
+**Listagem template disponíveis localmente:**
+```
+os list template
+```
+
+**Exemplo output:**
+```
+Catalog: skynet-typescript-catalog
++----------------------+---------------------------------------------+------------------+-----------------+
+| name                 | description                                 | types            | version(latest) |
++----------------------+---------------------------------------------+------------------+-----------------+
+| base-app-ts-template | Base template to work with typescript stack | ['app-template'] | no release      |
+|                      |                                             |                  |                 |
++----------------------+---------------------------------------------+------------------+-----------------+
+```
+
+### Instalacao
+Os passos dessa seção mostram como criar e configurar o plugin na aplicação  
+
+**Passo 1.** Copie e cole a URL abaixo no seu terminal:
+```
+os create app meu-teste-app -t skynet-typescript-catalog/base-app-ts-template
+```
+
+**Passo 2.** Acessar projeto criado:  
+```
+cd meu-teste-app
+```
+
+**Passo 3.** Aplicação de plugin baseado em catálogo:  
+```
+os apply plugin skynet-typescript-catalog/app-typescript-openapi-plugin
+```
 
 ## Tutorial
+Após criação e aplicação de plugin é possível realizar deploy de aplicação _Lambda_ gerada
 
 1. Execute CDK bootstrap to prepare stack and generate service stubs  
 ```
