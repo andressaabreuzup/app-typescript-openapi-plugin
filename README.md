@@ -98,6 +98,51 @@ cd meu-teste-app
 os apply plugin skynet-typescript-catalog/app-typescript-openapi-plugin
 ```
 
+### Inputs
+Abaixo estão listados os inputs do plugin.
+
+Os inputs necessários para utilizar o plugin são:  
+<table>
+  <thead>
+    <th>Campo</th>
+    <th>Tipo</th>
+    <th>Descrição</th>
+    <th>Valor Padrão</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>api_name</td>
+      <td>text</td>
+      <td>Defines the name of api, that may be used to link the generated source files and code references.</td>
+      <td>api-name</td>
+    </tr>
+    <tr>
+      <td>spec_file_name</td>
+      <td>text</td>
+      <td>Defines the location path of the OpenAPI specification file, by default it is spec-file-name.</td>
+      <td>spec-file-name</td>
+    </tr>
+    <tr>
+      <td>jwks_uri</td>
+      <td>text</td>
+      <td>Most IDM providers expose a JWKS_URI with their public keys to verify JWT token signatures. You need to use this input to inform JWKS_URI to be used to get the public keys.</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>virtualize_gateway</td>
+      <td>bool</td>
+      <td>If the contract to be worked with this plugin is already exposed on an API Gateway, this field should be informed with the entrypoint by each environment, dev, qa, prod, and so on, if not informed, an API Gateway CDK Implementation will be generated.</td>
+      <td>Y</td>
+    </tr>
+    <tr>
+      <td>gateway_entry_points</td>
+      <td>multiselect</td>
+      <td>If the contract to be worked with this plugin is already exposed on an API Gateway, this field should be informed with the entrypoint by each environment, dev, qa, prod, and so on, if not informed, an API Gateway CDK Implementation will be generated.</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
 ## Tutorial
 Após criação e aplicação de plugin é possível realizar deploy de aplicação _Lambda_ gerada
 
