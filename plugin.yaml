@@ -1,5 +1,5 @@
 name: app-typescript-openapi-plugin
-description: Plugin that applies contract first driven by an OpenAPI contract and auto generate source codes for lambdas and the nested CDK infrastructure
+description: Plugin que aplica o conceito de contract first a partir de um contrato OpenAPI e gera todo o código fonte e infraestrutura necessários em CDK.
 types:
   - app
 inputs:
@@ -34,3 +34,21 @@ inputs:
       - item1
       - item2
     required: false
+
+displayName: OpenAPI + API Gateway Plugin
+
+category: backend
+
+compatibility:
+  - OpenAPI 3.0
+  - NodeJS 14.x
+
+about: about.md
+
+usage: usage.md
+
+useCase: useCase.md
+
+implementation: implementation.md
+
+technologies: [ "Typescript", "OpenAPI", "API Gateway" ]

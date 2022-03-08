@@ -1,28 +1,3 @@
-- **Descrição:** O plugin Typescript OpenAPI permite a criação de Lambda com base em um arquivo de especificação OpenAPI.
-- **Categoria:** App
-- **Stack:** Lambda
-- **Criado em:** 11/02/2022
-- **Última atualização:** 11/02/2022
-- **Download:** [app-typescript-openapi-plugin](https://github.com/stack-spot/app-typescript-openapi-plugin)
-
-# Indice
-- [Visao Geral](#Visao-Geral)
-- [Uso](#Uso)
-  - [Pre-requisitos](#Pre-requisitos)
-  - [Recomendado](#Recomendado)
-  - [Configuração Stack CLI](#Configuração-Stack-CLI)
-    - [Verificacao template e plugin](#Verificacao_template_e_plugin)
-  - [Instalacao](#Instalacao)
-- [Tutorial](#Tutorial)
-- [Useful commands](#Useful-commands)
-- [Next Steps](#Next-steps)
-
-## Visao Geral
-### Como Typescript OpenAPI Plugin funciona
-Por meio das linhas de comando StackSpot é possível aplicar o plugin em uma aplicação do tipo APP  
-Ao realizar a aplicação o template de _construct_ cdk é criado na aplicação, utilizando o componente `@stackspot/cdk-component-openapi-typescript`  
-Durante a aplicação do plugin é gerado o código lambda baseado na especificação OpenAPI definida no arquivo `infra/spec/{{spec_file_name}}.yaml`
-
 ## Uso
 Nessa seção mostra como é feita a utilização do plugin por meio do CLI, criando uma aplicação baseada no template [**app-typescript-template**](https://github.com/stack-spot/app-typescript-template)  
 Após a criação da aplicação é possível aplicar o plugin **app-typescript-openapi-plugin**  
@@ -202,4 +177,3 @@ Congratulations! You created your API based on an OpenAPI specification and depl
 ## Next steps
 
 After OpenAPI Plugin has been applied, editing the file `{{spec_file_name}}.yaml` enables update the generated service stubs based on this file  
-
