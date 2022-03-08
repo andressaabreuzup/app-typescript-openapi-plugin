@@ -16,19 +16,19 @@ Recomendamos a utilização de algumas ferramentas para desenvolvimento
 
 ### Configuração Stack CLI
 Executar comando abaixo para atualização de local com catálogo que contém OpenAPI plugin:  
-```
+```bash
 stk add stack https://github.com/stack-spot/skynet-typescript-api-stack
 ```
 
 #### Verificacao template e plugin
 Executando os comandos abaixo é possível verificar que o catálogo foi carregado localmente  
 **Listagem plugin disponíveis localmente:**
-```
+```bash
 stk list plugin
 ```
 
 **Exemplo output:**
-```
+```bash
 Stack: skynet-typescript-api-stack
 +-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
 | name                              | description                                                                               | types   | version(latest) |
@@ -40,12 +40,12 @@ Stack: skynet-typescript-api-stack
 ```
 
 **Listagem template disponíveis localmente:**
-```
+```bash
 stk list template
 ```
 
 **Exemplo output:**
-```
+```bash
 Stack: skynet-typescript-api-stack
 +----------------------+---------------------------------------------+------------------+-----------------+
 | name                 | description                                 | types            | version(latest) |
@@ -59,17 +59,17 @@ Stack: skynet-typescript-api-stack
 Os passos dessa seção mostram como criar e configurar o plugin na aplicação  
 
 **Passo 1.** Copie e cole a URL abaixo no seu terminal:
-```
+```bash
 stk create app meu-teste-app -t skynet-typescript-api-stack/base-app-ts-template
 ```
 
 **Passo 2.** Acessar projeto criado:  
-```
+```bash
 cd meu-teste-app
 ```
 
 **Passo 3.** Aplicação de plugin baseado em catálogo:  
-```
+```bash
 stk apply plugin skynet-typescript-api-stack/app-typescript-openapi-plugin
 ```
 
@@ -85,29 +85,33 @@ Os inputs necessários para utilizar o plugin são:
 | *jwks_uri*                | text         |   Most IDM providers expose a JWKS_URI with their public keys to verify JWT token signatures. You need to use this input to inform JWKS_URI to be used to get the public keys. | - |
 | *virtualize_gateway*      | bool         |   If the contract to be worked with this plugin is already exposed on an API Gateway, this field should be informed with the entrypoint by each environment, dev, qa, prod, and so on, if not informed, an API Gateway CDK Implementation will be generated. | - |
 | *gateway_entry_points*    | multiselect         |  If the contract to be worked with this plugin is already exposed on an API Gateway, this field should be informed with the entrypoint by each environment, dev, qa, prod, and so on, if not informed, an API Gateway CDK Implementation will be generated. | - |
+
 ## Tutorial
 Após criação e aplicação de plugin é possível realizar deploy de aplicação _Lambda_ gerada
 
-1. Execute CDK bootstrap to prepare stack and generate service stubs  
-```
+1. Execute CDK bootstrap to prepare stack and generate service stubs 
+
+```bash
 cdk bootstrap --profile <your-aws-profile>
 ```
 
 ### Problem related to S3 public access
 If you have permissions problems related to S3 public access block configuration permissions on bootstrap you could add the option `--public-access-block-configuration false` to the bootstrap command as shown below:  
-```
+
+```bash
 cdk bootstrap --profile <your-aws-profile> --public-access-block-configuration false
 ```
 
 ### CDK Local
 This plugin configures automatically (for DEV environment) the use of _CDK Local_  
 To use LocalStack and do a local bootstrap execute the command below:  
-```
+
+```bash
 npm run local bootstrap
 ```
 
 2. Edit generated usecase stub (`{{source_dir}}/post-hello/usecase.ts`) and implement the code to generate the expected response imported from `{{source_dir}}/api-models.ts` as shown below:  
-```javascript
+```typescript
 import { HelloRequest, HelloResponse } from '../api-schemas';
 
 export type PostHelloParams = {
@@ -123,7 +127,7 @@ export const postHello = async ({ requestBody }: PostHelloParams): Promise<Hello
 
 3. Run `npm run build`, `cdk deploy` and call api at the endpoint created with an appropriate payload.
 
-```
+```bash
 npm run build
 cdk deploy
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "USERNAME"}' https://mhi8zrb3c7.execute-api.us-east-1.amazonaws.com/prod/hello

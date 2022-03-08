@@ -41,19 +41,19 @@ Recomendamos a utilização de algumas ferramentas para desenvolvimento
 
 ### Configuração Stack CLI
 Executar comando abaixo para atualização de local com catálogo que contém OpenAPI plugin:  
-```
+```bash
 stk add stack https://github.com/stack-spot/skynet-typescript-api-stack
 ```
 
 #### Verificacao template e plugin
 Executando os comandos abaixo é possível verificar que o catálogo foi carregado localmente  
 **Listagem plugin disponíveis localmente:**
-```
+```bash
 stk list plugin
 ```
 
 **Exemplo output:**
-```
+```bash
 Stack: skynet-typescript-api-stack
 +-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
 | name                              | description                                                                               | types   | version(latest) |
@@ -65,12 +65,12 @@ Stack: skynet-typescript-api-stack
 ```
 
 **Listagem template disponíveis localmente:**
-```
+```bash
 stk list template
 ```
 
 **Exemplo output:**
-```
+```bash
 Stack: skynet-typescript-api-stack
 +----------------------+---------------------------------------------+------------------+-----------------+
 | name                 | description                                 | types            | version(latest) |
@@ -84,17 +84,17 @@ Stack: skynet-typescript-api-stack
 Os passos dessa seção mostram como criar e configurar o plugin na aplicação  
 
 **Passo 1.** Copie e cole a URL abaixo no seu terminal:
-```
+```bash
 stk create app meu-teste-app -t skynet-typescript-api-stack/base-app-ts-template
 ```
 
 **Passo 2.** Acessar projeto criado:  
-```
+```bash
 cd meu-teste-app
 ```
 
 **Passo 3.** Aplicação de plugin baseado em catálogo:  
-```
+```bash
 stk apply plugin skynet-typescript-api-stack/app-typescript-openapi-plugin
 ```
 
