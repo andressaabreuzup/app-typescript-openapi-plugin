@@ -37,7 +37,7 @@ inputs:
 
 displayName: OpenAPI + API Gateway Plugin
 
-category: backend
+category: Backend
 
 compatibility:
   - OpenAPI 3.0
