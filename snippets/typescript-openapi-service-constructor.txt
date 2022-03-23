@@ -1,11 +1,15 @@
 
-const openApiServicesProps = {
-    specPath: 'spec/{{spec_file_name}}.yaml',
-    sourceDir: '../{{source_dir}}',
+const accessControl = {
     allowOrigin: '{{access_control_allow_origin}}',
     allowHeaders: '{{access_control_allow_headers}}',
     allowMethods: '{{access_control_allow_methods}}',
     allowCredentials: '{{access_control_allow_credentials}}',
+}
+
+const openApiServicesProps = {
+    specPath: 'spec/{{spec_file_name}}.yaml',
+    sourceDir: '../{{source_dir}}',
+    headerAccessControl: accessControl,
 }
 
 new StackSpotOpenApiServices(this, "StackSpotOpenApiServices", openApiServicesProps);
