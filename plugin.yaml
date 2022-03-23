@@ -3,37 +3,105 @@ description: Plugin que aplica o conceito de contract first a partir de um contr
 types:
   - app
 inputs:
-  - label: Defines the name of api, that may be used to link the generated source files and code references.
+  - label: Define o nome da API, também utilizado para fazer o link de códigos gerados e referências de código.
     type: text
     name: api_name
     default: api-name
     required: true
-  - label: Defines the location path of the OpenAPI specification file, by default it is spec-file-name.
+  - label: Define o nome do arquivo de especificação OpenAPI localizado no diretório /spec, por padrão é spec-file-name.
     type: text
     name: spec_file_name
     default: spec-file-name
     required: false
-  - label: Defines the location path of the OpenAPI lambda generated files, by default it is src.
+  - label: Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI lambda gerados, por padrão é src.
     type: text
     name: source_dir
     default: src
     required: false
-  - label: Most IDM providers expose a JWKS_URI with their public keys to verify JWT token signatures. You need to use this input to inform JWKS_URI to be used to get the public keys.
+  - label: A maioria dos provvedores IDM expõem uma 'JWKS_URI' com suas chaves públicas para verificar assinaturas JWT. Necessário definir essa entrada para informar a 'JWKS_URI' utilizada para resgatar as chaves públicas.
     type: text
     name: jwks_uri
     required: false
-  - label: If the contract to be worked with this plugin is already exposed on an API Gateway, this field should be informed with the entrypoint by each environment, dev, qa, prod, and so on, if not informed, an API Gateway CDK Implementation will be generated.
+  - label: Identificação se deve ou não virtualizar o API Gateway (True/False), por padrão é True
     type: bool
     name: virtualize_gateway
-    default: true
+    default: True
     required: false
-  - label: If the contract to be worked with this plugin is already exposed on an API Gateway, this field should be informed with the entrypoint by each environment, dev, qa, prod, and so on, if not informed, an API Gateway CDK Implementation will be generated.
+  - label: Caso o contrato definido nesse plugin ja está exposto no API Gateway, esse campo deve informar os pontos de entrada de cada ambiente (ex. dev, qa, prod), se não for informado, uma implementação API Gateway com CDK Implementation será gerada.
     type: multiselect
     name: gateway_entry_points
     items:
       - item1
       - item2
     required: false
+  - label: Define a utilização de Access-Control-Allow-Origin customizado dos endpoints. Por padrão é "*"
+    type: text
+    name: access_control_allow_origin
+    default: "*"
+    required: false
+  - label: Define a utilização de Access-Control-Allow-Headers customizado dos endpoints. Por padrão é "*"
+    type: text
+    name: access_control_allow_headers
+    default: "*"
+    required: false
+  - label: Define a utilização de Access-Control-Allow-Methods customizado dos endpoints. Por padrão é "*"
+    type: text
+    name: access_control_allow_methods
+    default: "*"
+    required: false
+  - label: Define a utilização de Access-Control-Allow-Credentials customizado dos endpoints. Por padrão é "*"
+    type: text
+    name: access_control_allow_credentials
+    default: "*"
+    required: false
+hooks:
+  - type: edit
+    trigger: before-render
+    path: infra/lib/{{service_name}}-service-stack.ts
+    changes:
+      - search:
+          string: import * as cdk from "@aws-cdk/core"
+          insert-after:
+            snippet: snippets/typescript-openapi-service-import.txt
+          when:
+            not-exists: import { StackSpotOpenApiServices } from "@stackspot/cdk-component-openapi-typescript"
+  - type: edit
+    trigger: before-render
+    path: infra/lib/{{service_name}}-service-stack.ts
+    changes:
+      - search:
+          string: "super(scope, id, props);"
+          insert-after:
+            snippet: snippets/typescript-openapi-service-constructor.txt
+          when:
+            not-exists: new StackSpotOpenApiServices(this, "StackSpotOpenApiServices", {
+  - type: edit
+    trigger: before-render
+    path: package.json
+    changes:
+      - search:
+          string: "scripts"
+          insert-after:
+            snippet: snippets/package-json-scripts.txt
+          when:
+            not-exists: "source:setup:openapi"
+  - type: run
+    trigger: after-render
+    mac:
+      - npm run infra:install:openapi
+      - npm run infra:format:fix
+      - npm run infra:build:cdk
+      - npm run source:setup:openapi
+    linux:
+      - npm run infra:install:openapi
+      - npm run infra:format:fix
+      - npm run infra:build:cdk
+      - npm run source:setup:openapi
+    windows:
+      - npm.cmd run infra:install:openapi
+      - npm.cmd run infra:format:fix
+      - npm.cmd run infra:build:cdk
+      - npm.cmd run source:setup:openapi
 
 displayName: OpenAPI + API Gateway Plugin
 

@@ -1,0 +1,2 @@
+    "infra:install:openapi": "cd infra && npm install && npm install @stackspot/cdk-component-openapi-typescript@^0.8.1",
+    "source:setup:openapi": "cd {{source_dir}} && npm install && npm install @types/aws-lambda@^8.10.86 && npm run build",
