@@ -9,6 +9,7 @@ inputs:
     default: api-name
     required: true
   - label: Define o nome do arquivo de especificação OpenAPI localizado no diretório /spec, por padrão é spec-file-name.
+    global: true
     type: text
     name: spec_file_name
     default: spec-file-name
