@@ -1,1 +1,1 @@
-import { StackSpotOpenApiServices } from "@stackspot/cdk-component-openapi-typescript";
+import { StackSpotOpenApiServices } from '@stackspot/cdk-component-openapi-typescript';

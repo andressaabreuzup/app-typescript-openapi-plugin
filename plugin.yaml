@@ -18,22 +18,22 @@ inputs:
     name: source_dir
     default: src
     required: false
-  - label: A maioria dos provvedores IDM expõem uma 'JWKS_URI' com suas chaves públicas para verificar assinaturas JWT. Necessário definir essa entrada para informar a 'JWKS_URI' utilizada para resgatar as chaves públicas.
-    type: text
-    name: jwks_uri
-    required: false
-  - label: Identificação se deve ou não virtualizar o API Gateway (True/False), por padrão é True
-    type: bool
-    name: virtualize_gateway
-    default: True
-    required: false
-  - label: Caso o contrato definido nesse plugin ja está exposto no API Gateway, esse campo deve informar os pontos de entrada de cada ambiente (ex. dev, qa, prod), se não for informado, uma implementação API Gateway com CDK Implementation será gerada.
-    type: multiselect
-    name: gateway_entry_points
-    items:
-      - item1
-      - item2
-    required: false
+  # - label: A maioria dos provvedores IDM expõem uma 'JWKS_URI' com suas chaves públicas para verificar assinaturas JWT. Necessário definir essa entrada para informar a 'JWKS_URI' utilizada para resgatar as chaves públicas.
+  #   type: text
+  #   name: jwks_uri
+  #   required: false
+  # - label: Identificação se deve ou não virtualizar o API Gateway (True/False), por padrão é True
+  #   type: bool
+  #   name: virtualize_gateway
+  #   default: false
+  #   required: false
+  # - label: Caso o contrato definido nesse plugin já esteja exposto no API Gateway, esse campo deve informar os pontos de entrada de cada ambiente (ex. dev, qa, prod), se não for informado, uma implementação API Gateway com CDK Implementation será gerada.
+  #   type: multiselect
+  #   name: gateway_entry_points
+  #   items:
+  #     - item1
+  #     - item2
+  #   required: false
   - label: Define a utilização de Access-Control-Allow-Origin customizado dos endpoints. Por padrão é "*"
     type: text
     name: access_control_allow_origin
@@ -60,7 +60,7 @@ hooks:
     path: infra/lib/{{service_name}}-service-stack.ts
     changes:
       - search:
-          string: import * as cdk from "@aws-cdk/core"
+          string: import * as cdk from '@aws-cdk/core'
           insert-after:
             snippet: snippets/typescript-openapi-service-import.txt
           when:
