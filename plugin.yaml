@@ -15,6 +15,7 @@ inputs:
     default: spec-file-name
     required: false
   - label: Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI lambda gerados, por padrão é src.
+    global: true
     type: text
     name: source_dir
     default: src
