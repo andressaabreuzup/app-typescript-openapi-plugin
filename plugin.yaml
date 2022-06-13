@@ -46,11 +46,11 @@ hooks:
     path: infra/lib/{{service_name}}-service-stack.ts
     changes:
       - search:
-          string: import * as cdk from '@aws-cdk/core'
+          string: "import { Construct } from 'constructs';"
           insert-after:
             snippet: snippets/typescript-openapi-service-import.txt
           when:
-            not-exists: import { StackSpotOpenApiServices } from "@stackspot/cdk-component-openapi-typescript"
+            not-exists: "import { StackSpotOpenApiServices } from '@stackspot/cdk-component-openapi-typescript'"
   - type: edit
     trigger: before-render
     path: infra/lib/{{service_name}}-service-stack.ts
@@ -60,7 +60,7 @@ hooks:
           insert-after:
             snippet: snippets/typescript-openapi-service-constructor.txt
           when:
-            not-exists: new StackSpotOpenApiServices(this, "StackSpotOpenApiServices", {
+            not-exists: new StackSpotOpenApiServices(this, 'StackSpotOpenApiServices'
   - type: edit
     trigger: before-render
     path: package.json

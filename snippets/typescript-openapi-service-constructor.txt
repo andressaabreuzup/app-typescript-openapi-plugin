@@ -1,5 +1,5 @@
 
-const accessControl = {
+const headerAccessControl = {
     allowOrigin: '{{access_control_allow_origin}}',
     allowHeaders: '{{access_control_allow_headers}}',
     allowMethods: '{{access_control_allow_methods}}',
@@ -9,7 +9,7 @@ const accessControl = {
 const openApiServicesProps = {
     specPath: 'spec/{{spec_file_name}}.yaml',
     sourceDir: '../{{source_dir}}',
-    headerAccessControl: accessControl,
+    headerAccessControl,
 }
 
-new StackSpotOpenApiServices(this, "StackSpotOpenApiServices", openApiServicesProps);
+new StackSpotOpenApiServices(this, 'StackSpotOpenApiServices', openApiServicesProps);
