@@ -1,6 +1,6 @@
 ## Developer workflow overview
 
-![Overview](images/openapi-lambda-architecture-Overview.drawio.png)
+![Overview](../images/openapi-lambda-architecture-Overview.drawio.png)
 
 1. Developer creates an OpenAPI spec using his favorite tools
 2. Developer runs StackSpot cli or cdk init to create CDK project (when cdk init is used is necessary to import and initialize the StackSpotOpenAPIServices construct in project stack)
@@ -10,7 +10,7 @@
 
 ## Generated source code
 
-![Overview](images/openapi-lambda-architecture-ComponentsView.drawio.png)
+![Overview](../images/openapi-lambda-architecture-ComponentsView.drawio.png)
 
 The generated source code is organized in a layered archicture with some basic components: **Core components, API Schemas and Errors, Parameters Configurations, Operation Controllers and Operation Use Cases.**
 
@@ -59,7 +59,7 @@ The generated source code is organized in a layered archicture with some basic c
 - Use cases are generated when user executes a cdk command but don't ovewrite already generated use cases, so you can safelly modify use case source code as you need.
 
 ## Generated Infrastucture
-![infrastructure](images/openapi-lambda-architecture-InfrastructureView.drawio.png)
+![infrastructure](../images/openapi-lambda-architecture-InfrastructureView.drawio.png)
 - The CDK construct generates the following components in the stack:
   - API gateway with all operations defined in spec
   - One lambda per operation defined

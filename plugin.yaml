@@ -96,6 +96,7 @@ category: Backend
 compatibility:
   - OpenAPI 3.0
   - NodeJS 14.x
+  - CDK 2.x
 
 about: about.md
 
@@ -105,4 +106,7 @@ useCase: useCase.md
 
 implementation: implementation.md
 
-technologies: [ "Typescript", "OpenAPI", "API Gateway" ]
+technologies:
+  - Typescript
+  - OpenAPI
+  - API Gateway

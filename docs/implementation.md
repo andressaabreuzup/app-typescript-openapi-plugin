@@ -106,8 +106,8 @@ const api = new StackSpotOpenApiServices(this, 'StackSpotOpenApiServicesID', ser
 > **enableTracing**: If true, enable Amazon X-Ray tracing for ApiGateway and Lambda Function  
 > **jwksUri**: JWKS URI to verify JWT Token signatures  
 > **endpointTypes**: Defines the ApiGateway endpoint type. **Default**: EndpointType.EDGE
-## References
 
+## References
 ### CDK
 
 - <https://docs.aws.amazon.com/cdk/latest/guide/home.html> - CDK Developer guide
