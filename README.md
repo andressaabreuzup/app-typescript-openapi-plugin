@@ -1,8 +1,8 @@
-- **Descrição:** O plugin Typescript OpenAPI permite a criação de Lambda com base em um arquivo de especificação OpenAPI.
-- **Categoria:** App
+- **Descrição**: O plugin Typescript OpenAPI permite a criação de Lambda com base em um arquivo de especificação OpenAPI.
+- **Categoria**: App
 - **Stack:** Lambda
-- **Criado em:** 11/02/2022
-- **Última atualização:** 11/02/2022
+- **Criado em**: 11/02/2022
+- **Última atualização**: 13/06/2022
 - **Download:** [app-typescript-openapi-plugin](https://github.com/stack-spot/app-typescript-openapi-plugin)
 
 # Indice
@@ -103,36 +103,44 @@ Abaixo estão listados os inputs do plugin.
 
 Os inputs necessários para utilizar o plugin são:  
 
-| Campo                   | Tipo           | Descrição  | Valor Padrão  |
-| :---------------------- |:--------------:| :---------- | :-------------| 
-| *api_name*              | text           | Defines the name of api, that may be used to link the generated source files and code references. | **api_name** |
-| *spec_file_name*          | text           | Defines the location path of the OpenAPI specification file, by default it is spec-file-name.     | **spec-file-name** |
-| *jwks_uri*                | text         |   Most IDM providers expose a JWKS_URI with their public keys to verify JWT token signatures. You need to use this input to inform JWKS_URI to be used to get the public keys. | - |
-| *virtualize_gateway*      | bool         |   If the contract to be worked with this plugin is already exposed on an API Gateway, this field should be informed with the entrypoint by each environment, dev, qa, prod, and so on, if not informed, an API Gateway CDK Implementation will be generated. | - |
-| *gateway_entry_points*    | multiselect         |  If the contract to be worked with this plugin is already exposed on an API Gateway, this field should be informed with the entrypoint by each environment, dev, qa, prod, and so on, if not informed, an API Gateway CDK Implementation will be generated. | - |
+| Campo                              | Tipo | Descrição                                                                                                     | Valor Padrão       |
+| :---                               | :--- | :---                                                                                                          | :---               |
+| *api_name*                         | text | Define o nome da API, também utilizado para fazer o link de códigos gerados e referências de código.          | **api_name**       |
+| *spec_file_name*                   | text | Define o nome do arquivo de especificação OpenAPI localizado no diretório /spec, por padrão é spec-file-name. | **spec-file-name** |
+| *source_dir*                       | text | Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI lambda gerados, por padrão é src.         | src                |
+| *access_control_allow_origin*      | text | Define a utilização de Access-Control-Allow-Origin customizado dos endpoints.                                 | *                  |
+| *access_control_allow_headers*     | text | Define a utilização de Access-Control-Allow-Headers customizado dos endpoints.                                | *                  |
+| *access_control_allow_methods*     | text | Define a utilização de Access-Control-Allow-Methods customizado dos endpoints.                                | *                  |
+| *access_control_allow_credentials* | text | Define a utilização de Access-Control-Allow-Credentials customizado dos endpoints.                            | *                  |
 
 ## Tutorial
 Após criação e aplicação de plugin é possível realizar deploy de aplicação _Lambda_ gerada
 
-1. Execute CDK bootstrap to prepare stack and generate service stubs  
+### 1. CDK bootstrap
+Executa _CDK bootstrap_ para preparar a stack e gerar os arquivos do serviço  
 ```
 cdk bootstrap --profile <your-aws-profile>
 ```
 
-### Problem related to S3 public access
-If you have permissions problems related to S3 public access block configuration permissions on bootstrap you could add the option `--public-access-block-configuration false` to the bootstrap command as shown below:  
+#### Problema relacionado ao acesso publico do S3
+Se problema de configuração de acesso publico bloqueado ao S3, na execução do comando _bootstrap_ é possível tentar com a opção `--public-access-block-configuration false` como demonstrado abaixo:  
 ```
 cdk bootstrap --profile <your-aws-profile> --public-access-block-configuration false
 ```
+> Obs.: Se utilizar _npm run cdk bootstrap_ para utilizar essa opção é necessário adicionar `--` após o comando (bootstrap):  
+> ```
+> npm run cdk bootstrap -- --public-access-block-configuration false
+> ```
 
-### CDK Local
-This plugin configures automatically (for DEV environment) the use of _CDK Local_  
-To use LocalStack and do a local bootstrap execute the command below:  
+#### CDK Local
+Esse plugin configura automaticamente (para ambiente de desenvolvimento) o uso de _CDK Local_ 
+Para usar _LocalStack_ e realizar o bootstrap localmente, executar o comando abaixo:  
 ```
 npm run local bootstrap
 ```
 
-2. Edit generated usecase stub (`{{source_dir}}/post-hello/usecase.ts`) and implement the code to generate the expected response imported from `{{source_dir}}/api-models.ts` as shown below:  
+### 2. Alterar retorno do endpoint
+Editar o arquivo _usecase_ gerado (`{{source_dir}}/post-hello/usecase.ts`) e implementar o código para gerar uma resposta esperada com o _import_ `{{source_dir}}/api-models.ts` como mostra abaixo:  
 ```javascript
 import { HelloRequest, HelloResponse } from '../api-schemas';
 
@@ -147,27 +155,27 @@ export const postHello = async ({ requestBody }: PostHelloParams): Promise<Hello
 };
 ```
 
-3. Run `npm run build`, `cdk deploy` and call api at the endpoint created with an appropriate payload.
-
+### 3. Build, deploy e chamada da API
+Execute `npm run build`, `cdk deploy` e faça uma chamada com _curl_ ao endpoint criado, com o _payload_ apropriado  
 ```
 npm run build
 cdk deploy
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "USERNAME"}' https://mhi8zrb3c7.execute-api.us-east-1.amazonaws.com/prod/hello
 ```
 
-Congratulations! You created your API based on an OpenAPI specification and deployed it at AWS with API Gateway and Lambda!
+Parabéns! Você criou sua API baseado em uma especificação OpenAPI, realizou o deploy dela na AWS e ja esta configurado com API Gateway e Lambda!  
 
-## Useful commands
+## Comandos Úteis
 
-- `npm run build` compile typescript to jsii
-- `npm run watch` watch for changes and compile
-- `npm run test` perform the jest unit tests
-- `npm run package` package library using jsii
-- `npm run coverage` run tests with coverage reports
-- `npm run local synth` synthesize CDK project with _cdk local_ and generate/update service stubs
-- `npm run local deploy` deploy build _lamba_ to localstack
+- `npm run build` compila typescript para jsii
+- `npm run watch` observa mudanças e compila
+- `npm run test` executa testes unitários com jest
+- `npm run coverage` executa cobertura de testes
+- `npm run local synth` sintetiza o projeto CDK com _cdk local_ e gera/atualiza o projeto
+- `npm run local deploy` realiza o deploy para o localstack
+- `npm run cdk synth` sintetiza o projeto CDK com _cdk_ e gera/atualiza o projeto
+- `npm run cdk deploy` realiza o deploy para a conta AWS configurada
 
-## Next steps
+## Próximos passos
 
-After OpenAPI Plugin has been applied, editing the file `{{spec_file_name}}.yaml` enables update the generated service stubs based on this file  
-
+Depois do Plugin OpenAPI aplicado, ao editar o arquivo `{{spec_file_name}}.yaml` habilita atualizar os arquivos baseados nessa especificação
