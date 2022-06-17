@@ -8,12 +8,25 @@ inputs:
     name: api_name
     default: api-name
     required: true
+  - label: Importar arquivo de especificação OpenAPI?
+    type: bool
+    name: import_spec_file
+    default: True
+    required: true
+  - label: Informe o caminho para o arquivo de especificação que será importado
+    type: text
+    name: import_spec_file_path
+    required: true
+    condition:
+      variable: import_spec_file
+      operator: ==
+      value: True
   - label: Define o nome do arquivo de especificação OpenAPI localizado no diretório /spec, por padrão é spec-file-name.
     global: true
     type: text
     name: spec_file_name
     default: spec-file-name
-    required: false
+    required: true
   - label: Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI lambda gerados, por padrão é src.
     global: true
     type: text
@@ -74,6 +87,21 @@ hooks:
   - type: run
     trigger: after-render
     mac:
+      - rm ./infra/spec/{{spec_file_name}}.yaml
+      - cp {{import_spec_file_path}} ./infra/spec/{{spec_file_name}}.yaml
+    linux:
+      - rm ./infra/spec/{{spec_file_name}}.yaml
+      - cp {{import_spec_file_path}} ./infra/spec/{{spec_file_name}}.yaml
+    windows:
+      - rm ./infra/spec/{{spec_file_name}}.yaml
+      - cp {{import_spec_file_path}} ./infra/spec/{{spec_file_name}}.yaml
+    condition:
+      variable: import_spec_file
+      operator: ==
+      value: True
+  - type: run
+    trigger: after-render
+    mac:
       - npm run infra:install:openapi
       - npm run infra:format:fix
       - npm run infra:build:cdk
@@ -98,13 +126,13 @@ compatibility:
   - NodeJS 14.x
   - CDK 2.x
 
-about: about.md
+about: docs/about.md
 
-usage: usage.md
+usage: docs/usage.md
 
-useCase: useCase.md
+useCase: docs/useCase.md
 
-implementation: implementation.md
+implementation: docs/implementation.md
 
 technologies:
   - Typescript

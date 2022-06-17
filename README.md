@@ -103,15 +103,17 @@ Abaixo estão listados os inputs do plugin.
 
 Os inputs necessários para utilizar o plugin são:  
 
-| Campo                              | Tipo | Descrição                                                                                                     | Valor Padrão       |
-| :---                               | :--- | :---                                                                                                          | :---               |
-| *api_name*                         | text | Define o nome da API, também utilizado para fazer o link de códigos gerados e referências de código.          | **api_name**       |
-| *spec_file_name*                   | text | Define o nome do arquivo de especificação OpenAPI localizado no diretório /spec, por padrão é spec-file-name. | **spec-file-name** |
-| *source_dir*                       | text | Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI lambda gerados, por padrão é src.         | src                |
-| *access_control_allow_origin*      | text | Define a utilização de Access-Control-Allow-Origin customizado dos endpoints.                                 | *                  |
-| *access_control_allow_headers*     | text | Define a utilização de Access-Control-Allow-Headers customizado dos endpoints.                                | *                  |
-| *access_control_allow_methods*     | text | Define a utilização de Access-Control-Allow-Methods customizado dos endpoints.                                | *                  |
-| *access_control_allow_credentials* | text | Define a utilização de Access-Control-Allow-Credentials customizado dos endpoints.                            | *                  |
+| Campo                              | Tipo | Descrição                                                                                                                         | Valor Padrão       |
+| :---                               | :--- | :---                                                                                                                              | :---               |
+| *api_name*                         | text | Define o nome da API, também utilizado para fazer o link de códigos gerados e referências de código.                              | api-name           |
+| *import_spec_file*                 | bool | Define se o usuário deseja importar um arquivo de especificação OpenAPI.                                                          | True               |
+| *import_spec_file_path*            | text | Define o o caminho para o arquivo de especificação que será importado. Obs.: apenas utilizado se **import_spec_file** for **True** |                    |
+| *spec_file_name*                   | text | Define o nome do arquivo de especificação OpenAPI localizado no diretório /spec, por padrão é spec-file-name.                     | spec-file-name     |
+| *source_dir*                       | text | Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI lambda gerados, por padrão é src.                             | src                |
+| *access_control_allow_origin*      | text | Define a utilização de Access-Control-Allow-Origin customizado dos endpoints.                                                     | *                  |
+| *access_control_allow_headers*     | text | Define a utilização de Access-Control-Allow-Headers customizado dos endpoints.                                                    | *                  |
+| *access_control_allow_methods*     | text | Define a utilização de Access-Control-Allow-Methods customizado dos endpoints.                                                    | *                  |
+| *access_control_allow_credentials* | text | Define a utilização de Access-Control-Allow-Credentials customizado dos endpoints.                                                | *                  |
 
 ## Tutorial
 Após criação e aplicação de plugin é possível realizar deploy de aplicação _Lambda_ gerada

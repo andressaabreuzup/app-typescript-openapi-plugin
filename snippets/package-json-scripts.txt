@@ -1,2 +1,2 @@
-    "infra:install:openapi": "cd infra && npm install && npm install @stackspot/cdk-component-openapi-typescript@^0.10.5",
+    "infra:install:openapi": "cd infra && npm install && npm install @stackspot/cdk-component-openapi-typescript@^0.10.7",
     "source:setup:openapi": "cd {{source_dir}} && npm install && npm run build",
