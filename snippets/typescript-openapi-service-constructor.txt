@@ -12,4 +12,4 @@ const openApiServicesProps = {
     headerAccessControl,
 }
 
-new StackSpotOpenApiServices(this, 'StackSpotOpenApiServices', openApiServicesProps);
+new StackSpotOpenApiServices(this, '{{service_name|title|replace("-", "")}}Services', openApiServicesProps);
