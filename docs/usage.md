@@ -17,7 +17,7 @@ Recomendamos a utilização de algumas ferramentas para desenvolvimento
 ### Configuração Stack CLI
 Executar comando abaixo para atualização de local com catálogo que contém OpenAPI plugin:  
 ```bash
-stk add stack https://github.com/stack-spot/skynet-typescript-api-stack
+stk add stack https://github.com/stack-spot/crystal-typescript-api-stack
 ```
 
 #### Verificacao template e plugin
@@ -29,7 +29,7 @@ stk list plugin
 
 **Exemplo output:**
 ```bash
-Stack: skynet-typescript-api-stack
+Stack: crystal-typescript-api-stack
 +-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
 | name                              | description                                                                               | types   | version(latest) |
 +-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
@@ -46,7 +46,7 @@ stk list template
 
 **Exemplo output:**
 ```bash
-Stack: skynet-typescript-api-stack
+Stack: crystal-typescript-api-stack
 +----------------------+---------------------------------------------+------------------+-----------------+
 | name                 | description                                 | types            | version(latest) |
 +----------------------+---------------------------------------------+------------------+-----------------+
@@ -60,7 +60,7 @@ Os passos dessa seção mostram como criar e configurar o plugin na aplicação
 
 **Passo 1.** Copie e cole a URL abaixo no seu terminal:
 ```bash
-stk create app meu-teste-app -t skynet-typescript-api-stack/base-app-ts-template
+stk create app meu-teste-app -t crystal-typescript-api-stack/base-app-ts-template
 ```
 
 **Passo 2.** Acessar projeto criado:  
@@ -70,7 +70,7 @@ cd meu-teste-app
 
 **Passo 3.** Aplicação de plugin baseado em catálogo:  
 ```bash
-stk apply plugin skynet-typescript-api-stack/app-typescript-openapi-plugin
+stk apply plugin crystal-typescript-api-stack/app-typescript-openapi-plugin
 ```
 
 ### Inputs
