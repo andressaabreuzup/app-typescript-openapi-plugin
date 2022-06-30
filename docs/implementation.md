@@ -1,5 +1,5 @@
-## Enabling JWT Security
-- The construct supports JWT tokens for security and the security can be enabled defining the following [OpenAPI security scheme](https://swagger.io/specification/#security-scheme-object):
+## Habilitando Segurança JWT
+- O _construct_ suporta tokens JWT e esse nível de segurança pode ser habilitado conforme [OpenAPI security scheme](https://swagger.io/specification/#security-scheme-object):
 ```yaml
 components:
   securitySchemes:
@@ -9,7 +9,7 @@ components:
       bearerFormat: JWT
 ```
 
-- You can enable JWT token validation for all operations defining a securty constraint at api root level or at operation level as shown below:
+- Também é possível habilitar validação de token JWT para todas as operações definindo a segurança na raiz da especificação OpenAPI ou a em cada operação, como demonstrado abaixo:
 
 ```yaml
 # root level
@@ -39,7 +39,7 @@ paths:
           description: Auction not found
 ```
 
-- Most IDM providers expose a JWKS_URI with their public keys to verify JWT token signatures. You need to configure the construct as shown below to inform JWKS_URI to be used to get the public keys:
+- A maioria dos fornecedores _IDM_ expõem a _JWKS_URI_ com suas chavez públicas para verificar assinaturas de token JWT. É preciso configurar o _construct_ como demonstrado abaixo para informar _JWKS_URI_ que será usada para pegar as chaves públicas:
 
 ```typescript
 const api = new StackSpotOpenApiServices(this, 'StackSampleAPI', {
@@ -48,64 +48,13 @@ const api = new StackSpotOpenApiServices(this, 'StackSampleAPI', {
 });
 ```
 
-- If you are using an IDM that supports OpenID connect you can get JWKS_URI endpoint in [well-known endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) of OpenID connect provider.
+- Se o projeto utilizar um _IDM_ que suporta conexão OpenID é possível pegar _JWKS_URI endpoint_ em [well-known endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) of OpenID connect provider.
 
-- When you enable JWT authorization your controllers will extend `JWTAuthorizationController` class and you can override the `authorizeResourceAccess` method to do some custom authorization logic. The JWT token payload can be accessed using `this.jwtTokenPayload` protected property. Controlles already generated before JWT authorization will not be overwrited an must be changed by the user.
+- Quando habilitado autorização _JWT_ os controllers irão extender a classe `JWTAuthorizationController` e é possível sobrescrever o método `authorizeResourceAccess` para fazer uma lógica própria de autorização. O token JWT do _payload_ pode ser acessado por meio da propriedade _protected_ `this.jwtTokenPayload`. Controllers já gerados antes da autorização JWT não serão sobrescritos e devem ser alterados pelo usuário.
 
-- With JWT Authorization enabled an API Gateway Lambda authorizer will be configured to validate the token.
+- Com autorização JWT habilitada o autorizador Lambda API Gateway será configurado para validar o token.
 
-- Authorization logic is not made by this lambda only the authenticity and validity of token is verified. You need to implement your authorization logic using token claims in operations controllers or create a new base constroller class based on `JWTAuthorizationControler` to use as base class of your controllers and implement authorization logic on it.
-
-## Properties Definition
-
-It's possible to configure properties on the construct as shown below:
-
-```typescript
-export interface StackSpotOpenAPIServicesProps {
-  readonly specPath: string;
-  readonly sourceDir?: string;
-  readonly enableValidation?: boolean;
-  readonly enableTracing?: boolean;
-  readonly jwksUri?: string;
-  readonly endpointTypes?: apigateway.EndpointType;
-}
-export declare enum EndpointType {
-  /**
-   * For an edge-optimized API and its custom domain name.
-   *
-   * @stability stable
-   */
-  EDGE = 'EDGE',
-  /**
-   * For a regional API and its custom domain name.
-   *
-   * @stability stable
-   */
-  REGIONAL = 'REGIONAL',
-  /**
-   * For a private API and its custom domain name.
-   *
-   * @stability stable
-   */
-  PRIVATE = 'PRIVATE',
-}
-const serviceProps: StackSpotOpenAPIServicesProps = {
-  specPath: 'spec/auction-api.yaml',
-  sourceDir: 'app/src',
-  enableValidation: true,
-  enableTracing: true,
-  jwksUri: 'https://some.idm.provider/auth/realms/some-realm/protocol/openid-connect/certs',
-  endpointTypes: EndpointType.EDGE,
-};
-const api = new StackSpotOpenApiServices(this, 'StackSpotOpenApiServicesID', serviceProps);
-```
-
-> **specPath**: Defines the path to OpenAPI specification file.  
-> **sourceDir**: Defines the path to the source code generated based on OpenAPI specification file. **Default**: 'src'  
-> **enableValidation**: If true, enable validators config in OpenAPI specification  
-> **enableTracing**: If true, enable Amazon X-Ray tracing for ApiGateway and Lambda Function  
-> **jwksUri**: JWKS URI to verify JWT Token signatures  
-> **endpointTypes**: Defines the ApiGateway endpoint type. **Default**: EndpointType.EDGE
+- Lógica de autorização não é feita pela (lambda), somente a autenticidade e validade do token são verificadas. É preciso implementar a própria lógica utilizando _token claims_ nas operações dos controllers ou criar uma nova classe baseada em `JWTAuthorizationControler` para utilizar a classe base os controller devem implementar a lógica de autorização.
 
 ## References
 ### CDK
