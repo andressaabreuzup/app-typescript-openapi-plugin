@@ -53,6 +53,11 @@ inputs:
     name: access_control_allow_credentials
     default: "*"
     required: false
+  - label: Deseja habilitar X-Ray para tracing das lambdas e API Gateway?
+    type: bool
+    name: enable_tracing
+    default: True
+    required: true
 hooks:
   - type: edit
     trigger: before-render

@@ -10,6 +10,7 @@ const openApiServicesProps = {
     specPath: 'spec/{{spec_file_name}}.yaml',
     sourceDir: '../{{source_dir}}',
     headerAccessControl,
+    enableTracing: {{enable_tracing}},
 }
 
 new StackSpotOpenApiServices(this, '{{service_name|title|replace("-", "")}}Services', openApiServicesProps);
