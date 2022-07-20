@@ -1,33 +1,35 @@
-## Uso
-Nessa seção mostra como é feita a utilização do plugin por meio do CLI, criando uma aplicação baseada no template [**app-typescript-template**](https://github.com/stack-spot/app-typescript-template)  
-Após a criação da aplicação é possível aplicar o plugin **app-typescript-openapi-plugin**  
+## **Uso**  
+Esta seção mostra como utilizar o Plugin por meio do STK CLI, criando uma aplicação baseada no Template [**app-typescript-template**](https://github.com/stack-spot/app-typescript-template).
 
-### Pre-requisitos
-Necessário a configuração de alguns pré-requisitos para utilização do plugin.  
-- [**Instalação StakSpot CLI**](https://docs.stackspot.com/v3.0.0/os-cli/installation/)
-- [**NodeJS**](https://nodejs.org/en/)
-- [**Git**](https://git-scm.com/)
-- [**AWS CLI**](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
-- [**CDK**](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html)
+Depois de criar a aplicação é possível aplicar o Plugin **`app-typescript-openapi-plugin`**.   
 
-### Recomendado
-Recomendamos a utilização de algumas ferramentas para desenvolvimento  
-- [**LocalStack**](https://github.com/localstack/localstack)
+### **Pré-requisitos**  
+É preciso ter as configurações abaixo para utilizar o Plugin:    
+- [**Instalar o STK CLI**](https://docs.stackspot.com/v3.0.0/os-cli/installation/);  
+- [**NodeJS**](https://nodejs.org/en/);  
+- [**Git**](https://git-scm.com/);  
+- [**AWS CLI**](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html);  
+- [**CDK**](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html);  
 
-### Configuração Stack CLI
-Executar comando abaixo para atualização de local com catálogo que contém OpenAPI plugin:  
+> É recomendando também usar o [**LocalStack**](https://github.com/localstack/localstack) como ferramenta de desenvolvimento. 
+
+### **Configuração do STK CLI**  
+Execute o comando abaixo para atualizar o local com o catálogo que tem o **`OpenAPI Plugin`**:    
+
 ```bash
 stk add stack https://github.com/stack-spot/crystal-typescript-api-stack
 ```
 
-#### Verificacao template e plugin
-Executando os comandos abaixo é possível verificar que o catálogo foi carregado localmente  
-**Listagem plugin disponíveis localmente:**
+#### **Verificação do Template e Plugin**    
+Executando os comandos abaixo é possível verificar se o catálogo foi carregado localmente.
+
+**Listagem de Plugins disponíveis localmente:**
+
 ```bash
 stk list plugin
 ```
 
-**Exemplo output:**
+**Exemplo de output:**  
 ```bash
 Stack: crystal-typescript-api-stack
 +-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
@@ -39,12 +41,12 @@ Stack: crystal-typescript-api-stack
 +-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
 ```
 
-**Listagem template disponíveis localmente:**
+**Listagem de Templates disponíveis localmente:**
 ```bash
 stk list template
 ```
 
-**Exemplo output:**
+**Exemplo de output:**
 ```bash
 Stack: crystal-typescript-api-stack
 +----------------------+---------------------------------------------+------------------+-----------------+
@@ -55,37 +57,38 @@ Stack: crystal-typescript-api-stack
 +----------------------+---------------------------------------------+------------------+-----------------+
 ```
 
-### Instalacao
-Os passos dessa seção mostram como criar e configurar o plugin na aplicação  
+### Instalação
+Siga os passos a passo abaixo para criar e configurar o Plugin na sua aplicação:    
 
 **Passo 1.** Copie e cole a URL abaixo no seu terminal:
+
 ```bash
 stk create app meu-teste-app -t crystal-typescript-api-stack/base-app-ts-template
 ```
 
-**Passo 2.** Acessar projeto criado:  
+**Passo 2.** Acesse o projeto criado:  
+
 ```bash
 cd meu-teste-app
 ```
 
-**Passo 3.** Aplicação de plugin baseado em catálogo:  
+**Passo 3.** Aplique o Plugin baseado em catálogo: 
+ 
 ```bash
 stk apply plugin crystal-typescript-api-stack/app-typescript-openapi-plugin
 ```
 
 ### Inputs
-Abaixo estão listados os inputs do plugin.
-
-Os inputs necessários para utilizar o plugin são:  
+Os inputs necessários para utilizar o Plugin são:  
 
 | Campo                              | Tipo | Descrição                                                                                                                         | Valor Padrão       |
 | :---                               | :--- | :---                                                                                                                              | :---               |
-| *api_name*                         | text | Define o nome da API, também utilizado para fazer o link de códigos gerados e referências de código.                              | api-name           |
+| *api_name*                         | text | Define o nome da API e também é utilizado para fazer o link de códigos gerados e referências de código.                              | api-name           |
 | *import_spec_file*                 | bool | Define se o usuário deseja importar um arquivo de especificação OpenAPI.                                                          | True               |
-| *import_spec_file_path*            | text | Define o o caminho para o arquivo de especificação que será importado. Obs.: apenas utilizado se **import_spec_file** for **True** |                    |
-| *spec_file_name*                   | text | Define o nome do arquivo de especificação OpenAPI localizado no diretório /spec, por padrão é spec-file-name.                     | spec-file-name     |
-| *source_dir*                       | text | Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI lambda gerados, por padrão é src.                             | src                |
-| *access_control_allow_origin*      | text | Define a utilização de Access-Control-Allow-Origin customizado dos endpoints.                                                     | *                  |
-| *access_control_allow_headers*     | text | Define a utilização de Access-Control-Allow-Headers customizado dos endpoints.                                                    | *                  |
-| *access_control_allow_methods*     | text | Define a utilização de Access-Control-Allow-Methods customizado dos endpoints.                                                    | *                  |
-| *access_control_allow_credentials* | text | Define a utilização de Access-Control-Allow-Credentials customizado dos endpoints.                                                | *                  |
+| *import_spec_file_path*            | text | Define o o caminho para o arquivo de especificação que será importado. Obs.: só se o **import_spec_file** for **True** |                    |
+| *spec_file_name*                   | text | Define o nome do arquivo de especificação OpenAPI localizado no diretório /spec. Por padrão é `spec-file-name`.                     | spec-file-name     |
+| *source_dir*                       | text | Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI Lambda gerados. Por padrão é `src`.                             | src                |
+| *access_control_allow_origin*      | text | Define a utilização de `Access-Control-Allow-` customizado dos endpoints.                                                     | *                  |
+| *access_control_allow_headers*     | text | Define a utilização de `Access-Control-Allow-Headers` customizado dos endpoints.                                                    | *                  |
+| *access_control_allow_methods*     | text | Define a utilização de `Access-Control-Allow-Methods` customizado dos endpoints.                                                    | *                  |
+| *access_control_allow_credentials* | text | Define a utilização de `Access-Control-Allow-Credentials` customizado dos endpoints.                                                | *                  |

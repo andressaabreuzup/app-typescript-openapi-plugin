@@ -1,5 +1,6 @@
-## Habilitando Segurança JWT
-- O _construct_ suporta tokens JWT e esse nível de segurança pode ser habilitado conforme [OpenAPI security scheme](https://swagger.io/specification/#security-scheme-object):
+## **Habilitando a Segurança JWT**
+O Template **_construct_** suporta tokens **JWT** e este nível de segurança pode ser habilitado conforme a especificação do [**OpenAPI security scheme**](https://swagger.io/specification/#security-scheme-object) abaixo:  
+
 ```yaml
 components:
   securitySchemes:
@@ -9,7 +10,7 @@ components:
       bearerFormat: JWT
 ```
 
-- Também é possível habilitar validação de token JWT para todas as operações definindo a segurança na raiz da especificação OpenAPI ou a em cada operação, como demonstrado abaixo:
+Também é possível habilitar a validação de token JWT para todas as operações, definindo a segurança na raiz da especificação OpenAPI ou em cada operação. Confira o exemplo abaixo:  
 
 ```yaml
 # root level
@@ -39,7 +40,10 @@ paths:
           description: Auction not found
 ```
 
-- A maioria dos fornecedores _IDM_ expõem a _JWKS_URI_ com suas chavez públicas para verificar assinaturas de token JWT. É preciso configurar o _construct_ como demonstrado abaixo para informar _JWKS_URI_ que será usada para pegar as chaves públicas:
+A maioria dos fornecedores **_IDM_** expõem a **_JWKS_URI_** com as próprias chaves públicas para verificar as assinaturas de token JWT. 
+
+> É preciso configurar o **_construct_**
+para informar _JWKS_URI_ que será usada para pegar as chaves públicas. Confira o exemplo abaixo:  
 
 ```typescript
 const api = new StackSpotOpenApiServices(this, 'StackSampleAPI', {
@@ -48,15 +52,18 @@ const api = new StackSpotOpenApiServices(this, 'StackSampleAPI', {
 });
 ```
 
-- Se o projeto utilizar um _IDM_ que suporta conexão OpenID é possível pegar _JWKS_URI endpoint_ em [well-known endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) of OpenID connect provider.
+Se o projeto utilizar um **_IDM_** que suporta conexão OpenID, é possível pegar _JWKS_URI endpoint_ em [well-known endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) 
 
-- Quando habilitado autorização _JWT_ os controllers irão extender a classe `JWTAuthorizationController` e é possível sobrescrever o método `authorizeResourceAccess` para fazer uma lógica própria de autorização. O token JWT do _payload_ pode ser acessado por meio da propriedade _protected_ `this.jwtTokenPayload`. Controllers já gerados antes da autorização JWT não serão sobrescritos e devem ser alterados pelo usuário.
+- Quando a autorização _JWT_ é habilitada, os `controllers` extendem a classe `JWTAuthorizationController` e possibilitam sobrescrever o método `authorizeResourceAccess` para fazer uma lógica própria de autorização. 
 
-- Com autorização JWT habilitada o autorizador Lambda API Gateway será configurado para validar o token.
+O token JWT do `_payload_` pode ser acessado por meio da propriedade **_protected_ `this.jwtTokenPayload`**. 
+Os controllers já gerados antes da autorização JWT não serão sobrescritos e devem ser alterados pelo usuário.
 
-- Lógica de autorização não é feita pela (lambda), somente a autenticidade e validade do token são verificadas. É preciso implementar a própria lógica utilizando _token claims_ nas operações dos controllers ou criar uma nova classe baseada em `JWTAuthorizationControler` para utilizar a classe base os controller devem implementar a lógica de autorização.
+- Com a autorização JWT habilitada, o autorizador **`Lambda API Gateway`** será configurado para validar o token.
 
-## References
+> A lógica de autorização não é feita pela Lambda, somente a autenticidade e validade do token são verificadas. Por isso, é preciso implementar a própria lógica utilizando _token claims_ nas operações dos controllers ou criar uma nova classe baseada em `JWTAuthorizationControler` para utilizar a classe base. Os controllers devem implementar a lógica de autorização.
+
+## Referências
 ### CDK
 
 - <https://docs.aws.amazon.com/cdk/latest/guide/home.html> - CDK Developer guide
