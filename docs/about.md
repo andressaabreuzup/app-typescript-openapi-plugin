@@ -1,7 +1,5 @@
-## Visão Geral
-### **Funcionamento do Typescript OpenAPI Plugin**  
-Por meio das linhas de comando da StackSpot (STK CLI) é possível aplicar o plugin em uma aplicação do tipo **APP**.
-
-Ao aplicar o Template de **_construct_**, o **cdk** é criado na aplicação, utilizando o componente **`@stackspot/cdk-component-openapi-typescript`**.  
-
-Durante a aplicação do Plugin, um código Lambda é gerado baseado na especificação **OpenAPI**, definida no arquivo **`infra/spec/{{spec_file_name}}.yaml`**. 
+## Overview
+### How Typescript OpenAPI Plugin works
+Through the StackSpot command lines, it is possible to apply the plugin in an APP type application.
+When executing the application, the _construct_ cdk template is created in the application, using the component `@stackspot/cdk-component-openapi-typescript`.  
+During the application of the plugin, the Lambda code is generated based on the OpenAPI specification defined in the file `infra/spec/{{spec_file_name}}.yaml`.

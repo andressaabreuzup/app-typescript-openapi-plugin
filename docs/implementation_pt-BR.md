@@ -1,5 +1,5 @@
-## Enabling JWT Security
-- The _construct_ supports JWT tokens and this level of security can be enabled as [OpenAPI security scheme](https://swagger.io/specification/#security-scheme-object):
+## Habilitando Segurança JWT
+- O _construct_ suporta tokens JWT e esse nível de segurança pode ser habilitado conforme [OpenAPI security scheme](https://swagger.io/specification/#security-scheme-object):
 ```yaml
 components:
   securitySchemes:
@@ -9,7 +9,7 @@ components:
       bearerFormat: JWT
 ```
 
-- It is also possible to enable JWT token validation for all operations by setting security at the root of the OpenAPI specification or each operation as demonstrated below:
+- Também é possível habilitar validação de token JWT para todas as operações definindo a segurança na raiz da especificação OpenAPI ou em cada operação, como demonstrado abaixo:
 
 ```yaml
 # root level
@@ -39,7 +39,7 @@ paths:
           description: Auction not found
 ```
 
-- Most _IDM_ providers expose the _JWKS_URI_ with their public keys to verify JWT token signatures. You need to configure the _construct_ as shown below to inform the _JWKS_URI_ that will be used to get the public keys:
+- A maioria dos fornecedores _IDM_ expõem a _JWKS_URI_ com suas chavez públicas para verificar assinaturas de token JWT. É preciso configurar o _construct_ como demonstrado abaixo para informar _JWKS_URI_ que será usada para pegar as chaves públicas:
 
 ```typescript
 const api = new StackSpotOpenApiServices(this, 'StackSampleAPI', {
@@ -48,13 +48,13 @@ const api = new StackSpotOpenApiServices(this, 'StackSampleAPI', {
 });
 ```
 
-- If the project uses an _IDM_ that supports OpenID connection it is possible to get _JWKS_URI endpoint_ in [well-known endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) of OpenID connect provider.
+- Se o projeto utilizar um _IDM_ que suporta conexão OpenID é possível pegar _JWKS_URI endpoint_ em [well-known endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) of OpenID connect provider.
 
-- When enabled _JWT_ authorization controllers will extend the class `JWTAuthorizationController` and it is possible to override the method `authorizeResourceAccess` to make your own authorization logic. The _payload_ JWT token can be accessed through the property _protected_ `this.jwtTokenPayload`. Controllers already generated before JWT authorization will not be overwritten and must be changed by the user.
+- Quando habilitado autorização _JWT_ os controllers irão extender a classe `JWTAuthorizationController` e é possível sobrescrever o método `authorizeResourceAccess` para fazer uma lógica própria de autorização. O token JWT do _payload_ pode ser acessado por meio da propriedade _protected_ `this.jwtTokenPayload`. Controllers já gerados antes da autorização JWT não serão sobrescritos e devem ser alterados pelo usuário.
 
-- With JWT authorization enabled, the Lambda API Gateway authorizer will be configured to validate the token.
+- Com autorização JWT habilitada, o autorizador Lambda API Gateway será configurado para validar o token.
 
-- Authorization logic is not done by (lambda), only the authenticity and validity of the token are verified. You need to implement your own logic using _token claims_ in the controller operations or create a new class based on `JWTAuthorizationControler`, to use the base class, the controllers must implement authorization logic.
+- Lógica de autorização não é feita pela (lambda), somente a autenticidade e validade do token são verificadas. É preciso implementar a própria lógica utilizando _token claims_ nas operações dos controllers ou criar uma nova classe baseada em `JWTAuthorizationControler`, para utilizar a classe base, os controllers devem implementar a lógica de autorização.
 
 ## References
 ### CDK

@@ -1,62 +1,58 @@
-- **Descrição**: O plugin **Typescript OpenAPI** permite a criar uma Lambda com base em um arquivo de especificação **OpenAPI**.
-- **Categoria**: App
+- **Description**: Typescript OpenAPI plugin allows the creation of Lambda based on an OpenAPI specification file.
+- **Category**: App
 - **Stack:** Lambda
-- **Criado em**: 11/02/2022
-- **Última atualização**: 13/06/2022
+- **Created in**: 11/02/2022
+- **Last update**: 13/06/2022
 - **Download:** [app-typescript-openapi-plugin](https://github.com/stack-spot/app-typescript-openapi-plugin)
 
-# Índice  
-- [Visão Geral](#Visao-Geral)
-- [Uso](#Uso)
-  - [Pré-requisitos](#Pre-requisitos)
-  - [Recomendado](#Recomendado)
-  - [Configuração do STK CLI](#Configuração-Stack-CLI)
-    - [Verificação de Template e Plugin](#Verificacao_template_e_plugin)
-  - [Instalação](#Instalacao)
+# Summary
+- [Overview](#Overview)
+- [Use](#Use)
+  - [Requirements](#Requirements)
+  - [Recommended](#Recommended)
+  - [Stack CLI](#Stack-CLI)
+    - [Template and plugin verification](#Template-and-plugin-verification)
+  - [Install](#Install)
 - [Tutorial](#Tutorial)
 - [Useful commands](#Useful-commands)
 - [Next Steps](#Next-steps)
 
-## **Visão Geral**  
-### **Funcionamento do Typescript OpenAPI Plugin**  
-Por meio das linhas de comando da StackSpot (STK CLI) é possível aplicar o plugin em uma aplicação do tipo **APP**.
+## Overview
+### How Typescript OpenAPI Plugin works
+Through the StackSpot command lines, it is possible to apply the plugin in an APP type application.
+When executing the application, the _construct_ cdk template is created in the application, using the component `@stackspot/cdk-component-openapi-typescript`.  
+During the application of the plugin, the Lambda code is generated based on the OpenAPI specification defined in the file `infra/spec/{{spec_file_name}}.yaml`.
 
-Ao aplicar o Template de **_construct_**, o **cdk** é criado na aplicação, utilizando o componente **`@stackspot/cdk-component-openapi-typescript`**.  
+## Use
+This section shows how the plugin is used through the CLI, creating an application based on the template [**app-typescript-template**](https://github.com/stack-spot/app-typescript-template).  
+After creating the application it is possible to apply the plugin **app-typescript-openapi-plugin**.
 
-Durante a aplicação do Plugin, um código Lambda é gerado baseado na especificação **OpenAPI**, definida no arquivo **`infra/spec/{{spec_file_name}}.yaml`**. 
+### Requirements
+It is necessary to configure some prerequisites to use the plugin.
+- [**Install the StakSpot CLI**](https://docs.stackspot.com/v3.0.0/os-cli/installation/)
+- [**NodeJS**](https://nodejs.org/en/)
+- [**Git**](https://git-scm.com/)
+- [**AWS CLI**](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
+- [**CDK**](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html)
 
-## **Uso**  
-Esta seção mostra como utilizar o Plugin por meio do STK CLI, criando uma aplicação baseada no Template [**app-typescript-template**](https://github.com/stack-spot/app-typescript-template).
+### Recommended
+It's recommended you use some development tools:
+- [**LocalStack**](https://github.com/localstack/localstack)
 
-Depois de criar a aplicação é possível aplicar o Plugin **`app-typescript-openapi-plugin`**.   
-
-### **Pré-requisitos**  
-É preciso ter as configurações abaixo para utilizar o Plugin:    
-- [**Instalar o STK CLI**](https://docs.stackspot.com/v3.0.0/os-cli/installation/);  
-- [**NodeJS**](https://nodejs.org/en/);  
-- [**Git**](https://git-scm.com/);  
-- [**AWS CLI**](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html);  
-- [**CDK**](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html);  
-
-> É recomendando também usar o [**LocalStack**](https://github.com/localstack/localstack) como ferramenta de desenvolvimento. 
-
-### **Configuração do STK CLI**  
-Execute o comando abaixo para atualizar o local com o catálogo que tem o **`OpenAPI Plugin`**:    
-
+### Stack CLI configuration
+Run the command below to update the local Stack with the catalog that contains the OpenAPI plugin:
 ```bash
 stk add stack https://github.com/stack-spot/crystal-typescript-api-stack
 ```
 
-#### **Verificação do Template e Plugin**    
-Executando os comandos abaixo é possível verificar se o catálogo foi carregado localmente.
-
-**Listagem de Plugins disponíveis localmente:**
-
+#### Template and plugin verification
+Run the command below to list and verify that catalog was loaded locally.
+**Plugin listing available locally:**
 ```bash
 stk list plugin
 ```
 
-**Exemplo de output:**  
+**Output example:**
 ```bash
 Stack: crystal-typescript-api-stack
 +-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
@@ -68,12 +64,12 @@ Stack: crystal-typescript-api-stack
 +-----------------------------------+-------------------------------------------------------------------------------------------+---------+-----------------+
 ```
 
-**Listagem de Templates disponíveis localmente:**
+**Template listing available locally:**
 ```bash
 stk list template
 ```
 
-**Exemplo de output:**
+**Output example:**
 ```bash
 Stack: crystal-typescript-api-stack
 +----------------------+---------------------------------------------+------------------+-----------------+
@@ -84,75 +80,69 @@ Stack: crystal-typescript-api-stack
 +----------------------+---------------------------------------------+------------------+-----------------+
 ```
 
-### **Instalação**  
-Siga os passos a passo abaixo para criar e configurar o Plugin na sua aplicação:    
+### Install
+The steps in this section show how to create and configure the plugin in the application.
 
-**Passo 1.** Copie e cole a URL abaixo no seu terminal:
-
+**Step 1.** Copy and paste the URL below into your terminal:
 ```bash
 stk create app meu-teste-app -t crystal-typescript-api-stack/base-app-ts-template
 ```
 
-**Passo 2.** Acesse o projeto criado:  
-
+**Step 2.** Access created project:
 ```bash
 cd meu-teste-app
 ```
 
-**Passo 3.** Aplique o Plugin baseado em catálogo: 
- 
+**Step 3.** Catalog based plugin application:
 ```bash
 stk apply plugin crystal-typescript-api-stack/app-typescript-openapi-plugin
 ```
 
 ### Inputs
-Os inputs necessários para utilizar o Plugin são:  
+Below are listed the plugin inputs.
 
-| Campo                              | Tipo | Descrição                                                                                                                         | Valor Padrão       |
-| :---                               | :--- | :---                                                                                                                              | :---               |
-| *api_name*                         | text | Define o nome da API e também é utilizado para fazer o link de códigos gerados e referências de código.                              | api-name           |
-| *import_spec_file*                 | bool | Define se o usuário deseja importar um arquivo de especificação OpenAPI.                                                          | True               |
-| *import_spec_file_path*            | text | Define o o caminho para o arquivo de especificação que será importado. Obs.: só se o **import_spec_file** for **True** |                    |
-| *spec_file_name*                   | text | Define o nome do arquivo de especificação OpenAPI localizado no diretório /spec. Por padrão é `spec-file-name`.                     | spec-file-name     |
-| *source_dir*                       | text | Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI Lambda gerados. Por padrão é `src`.                             | src                |
-| *access_control_allow_origin*      | text | Define a utilização de `Access-Control-Allow-` customizado dos endpoints.                                                     | *                  |
-| *access_control_allow_headers*     | text | Define a utilização de `Access-Control-Allow-Headers` customizado dos endpoints.                                                    | *                  |
-| *access_control_allow_methods*     | text | Define a utilização de `Access-Control-Allow-Methods` customizado dos endpoints.                                                    | *                  |
-| *access_control_allow_credentials* | text | Define a utilização de `Access-Control-Allow-Credentials` customizado dos endpoints.                                                | *                  |
+The inputs needed to use the plugin are:
 
-## **Tutorial**  
-Depois de criar e aplicar o Plugin, é possível fazer o deploy da aplicação _Lambda_ gerada. 
+| Field                              | Type | Description                                                                                                           | Default Value  |
+|:-----------------------------------|:-----|:----------------------------------------------------------------------------------------------------------------------|:---------------|
+| *api_name*                         | text | Defines the name of the API, also used to link generated codes and code references.                                   | api-name       |
+| *import_spec_file*                 | bool | Defines whether the user wants to import an OpenAPI specification file.                                               | True           |
+| *import_spec_file_path*            | text | Defines the path to the specification file that will be imported. Note: only used if **import_spec_file** is **True** |                |
+| *spec_file_name*                   | text | Defines the name of the OpenAPI specification file located in the /spec directory, by default it is spec-file-name.   | spec-file-name |
+| *source_dir*                       | text | Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI lambda gerados, por padrão é src.                 | src            |
+| *access_control_allow_origin*      | text | Sets the path, starting from the project root, of the generated OpenAPI lambda files, by default it is.               | *              |
+| *access_control_allow_headers*     | text | Defines the use of custom Access-Control-Allow-Headers of endpoints                                                   | *              |
+| *access_control_allow_methods*     | text | Defines the use of custom Access-Control-Allow-Methods of endpoints.                                                  | *              |
+| *access_control_allow_credentials* | text | Defines the use of custom Access-Control-Allow-Credentials of endpoints.                                              | *              |
 
-### **1. CDK bootstrap**
-Execute o _CDK bootstrap_ abaixo para preparar a Stack e gerar os arquivos do serviço: 
+## Tutorial
+After creating and applying the plugin, it is possible to deploy the generated _Lambda_ application.
 
+### 1. CDK bootstrap
+1. Runs the _CDK bootstrap_ to prepare the stack and generate the service stubs. 
 ```
 cdk bootstrap --profile <your-aws-profile>
 ```
 
-#### **Problema relacionado ao acesso público do S3**  
-Se houver problema de configuração de acesso público bloqueado ao S3, na execução do comando _bootstrap_ é possível solucionar com a opção `--public-access-block-configuration false`. Confira o exemplo abaixo:  
-
+#### Problem related to S3 public access
+If you have permissions problems related to S3 public access block configuration permissions on bootstrap you could add the option `--public-access-block-configuration false` to the bootstrap command as shown below:  
 ```
 cdk bootstrap --profile <your-aws-profile> --public-access-block-configuration false
 ```
-> Obs.: Se utilizar _npm run cdk bootstrap_, é necessário adicionar `--` após o comando `bootstrap`:  
+> Obs.: If use _npm run cdk bootstrap_ to use this option it is necessary to add `--` after the command (bootstrap):  
 > ```
 > npm run cdk bootstrap -- --public-access-block-configuration false
 > ```
 
 #### CDK Local
-Este Plugin configura automaticamente, para ambiente de desenvolvimento, o uso de _CDK Local_.
-
-Para usar _LocalStack_ e fazer o bootstrap localmente, execute o comando abaixo:  
-
+This plugin configures automatically (for DEV environment) the use of _CDK Local_  
+To use LocalStack and do a local bootstrap, run the command below:
 ```
 npm run local bootstrap
 ```
 
-### **2. Alterar o retorno do endpoint**
-Edite o arquivo _usecase_ gerado (`{{source_dir}}/post-hello/usecase.ts`) e implemente o código para gerar uma resposta esperada com o _import_ `{{source_dir}}/api-models.ts`. Confira o exemplo abaixo:  
-
+### 2. Alterar retorno do endpoint
+Edit generated _usecase_ stub (`{{source_dir}}/post-hello/usecase.ts`) and implement the code to generate the expected response imported from `{{source_dir}}/api-models.ts` as shown below:  
 ```javascript
 import { HelloRequest, HelloResponse } from '../api-schemas';
 
@@ -167,30 +157,27 @@ export const postHello = async ({ requestBody }: PostHelloParams): Promise<Hello
 };
 ```
 
-### **3. Build, deploy e chamada da API**  
-Execute `npm run build`, `cdk deploy` e faça uma chamada com _curl_ ao endpoint criado, com o _payload_ apropriado. Confira o exemplo abaixo:  
-
+### 3. Build, deploy e chamada da API
+Run `npm run build`, `cdk deploy` and call API at the endpoint created with an appropriate payload.  
 ```
 npm run build
 cdk deploy
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "USERNAME"}' https://mhi8zrb3c7.execute-api.us-east-1.amazonaws.com/prod/hello
 ```
 
-> Parabéns! Você criou sua API baseada em uma especificação OpenAPI, realizou o deploy dela na AWS e já esta configurada com a API Gateway e Lambda!  
+Congratulations! You created your API based on an OpenAPI specification and deployed it at AWS with API Gateway and Lambda!
 
-## **Comandos Úteis**  
+## Useful commands
 
-**Comando**   | **Descrição**
---------- | ------
-`npm run build`| Compila typescript para jsii.
-`npm run watch` | Observa as mudanças e as compila.
-`npm run test` | Executa os testes unitários com jest.
-`npm run coverage` | Executa a cobertura de testes. 
-`npm run local synth` | Sintetiza o projeto CDK com _cdk local_ e gera/atualiza o projeto.
-`npm run local deploy` | Faz o deploy para o localstack
-`npm run cdk synth` | Sintetiza o projeto CDK com _cdk_ e gera/atualiza o projeto.
-`npm run cdk deploy` | Faz o deploy para a conta AWS configurada.
+- `npm run build` compile typescript to jsii
+- `npm run watch` watch for changes and compile
+- `npm run test` perform the jest unit tests
+- `npm run package` package library using jsii
+- `npm run coverage` run tests with coverage reports
+- `npm run local synth` synthesize CDK project with _cdk local_ and generate/update service stubs
+- `npm run local deploy` deploy build _lamba_ to localstack
 
-## **Próximos passos**  
+## Next steps
 
-Depois de aplicar o Plugin OpenAPI, ao editar o arquivo `{{spec_file_name}}.yaml`, é possível atualizar os arquivos baseados nesta especificação. 
+After OpenAPI Plugin has been applied, editing the file `{{spec_file_name}}.yaml` enables updating the generated service stubs based on this file.  
+
