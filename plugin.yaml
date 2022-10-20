@@ -1,19 +1,19 @@
 name: app-typescript-openapi-plugin
-description: Plugin que aplica o conceito de contract first a partir de um contrato OpenAPI e gera todo o código fonte e infraestrutura necessários em CDK.
+description: Plugin that applies the concept of contract first from an OpenAPI contract and generates all the necessary source code and infrastructure in CDK.
 types:
   - app
 inputs:
-  - label: Define o nome da API, também utilizado para fazer o link de códigos gerados e referências de código.
+  - label: Defines the name of the API, also used to link generated codes and code references.
     type: text
     name: api_name
     default: api-name
     required: true
-  - label: Importar arquivo de especificação OpenAPI?
+  - label: Import OpenAPI spec file?
     type: bool
     name: import_spec_file
     default: True
     required: true
-  - label: Informe o caminho para o arquivo de especificação que será importado
+  - label: Defines the path to the specification file that will be imported
     type: text
     name: import_spec_file_path
     required: true
@@ -21,39 +21,39 @@ inputs:
       variable: import_spec_file
       operator: ==
       value: True
-  - label: Define o nome do arquivo de especificação OpenAPI localizado no diretório /spec, por padrão é spec-file-name.
+  - label: Defines the name of the OpenAPI specification file located in the /spec directory.
     global: true
     type: text
     name: spec_file_name
     default: spec-file-name
     required: true
-  - label: Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI lambda gerados, por padrão é src.
+  - label: Sets the path, starting from the project root, of the generated OpenAPI lambda files.
     global: true
     type: text
     name: source_dir
     default: src
     required: false
-  - label: Define a utilização de Access-Control-Allow-Origin customizado dos endpoints. Por padrão é "*"
+  - label: Defines the use of custom Access-Control-Allow-Origin of endpoints
     type: text
     name: access_control_allow_origin
     default: "*"
     required: false
-  - label: Define a utilização de Access-Control-Allow-Headers customizado dos endpoints. Por padrão é "*"
+  - label: Defines the use of custom Access-Control-Allow-Headers of endpoints
     type: text
     name: access_control_allow_headers
     default: "*"
     required: false
-  - label: Define a utilização de Access-Control-Allow-Methods customizado dos endpoints. Por padrão é "*"
+  - label: Defines the use of custom Access-Control-Allow-Methods of endpoints
     type: text
     name: access_control_allow_methods
     default: "*"
     required: false
-  - label: Define a utilização de Access-Control-Allow-Credentials customizado dos endpoints. Por padrão é "*"
+  - label: Defines the use of custom Access-Control-Allow-Credentials of endpoints
     type: text
     name: access_control_allow_credentials
     default: "*"
     required: false
-  - label: Deseja habilitar X-Ray para tracing das lambdas e API Gateway?
+  - label: Enable X-Ray to trace lambdas and API Gateway?
     type: bool
     name: enable_tracing
     default: True

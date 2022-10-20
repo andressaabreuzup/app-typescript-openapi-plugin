@@ -109,9 +109,9 @@ The inputs needed to use the plugin are:
 | *import_spec_file*                 | bool | Defines whether the user wants to import an OpenAPI specification file.                                               | True           |
 | *import_spec_file_path*            | text | Defines the path to the specification file that will be imported. Note: only used if **import_spec_file** is **True** |                |
 | *spec_file_name*                   | text | Defines the name of the OpenAPI specification file located in the /spec directory, by default it is spec-file-name.   | spec-file-name |
-| *source_dir*                       | text | Define o caminho, a partir da raiz do projeto, dos arquivos OpenAPI lambda gerados, por padrão é src.                 | src            |
-| *access_control_allow_origin*      | text | Sets the path, starting from the project root, of the generated OpenAPI lambda files, by default it is.               | *              |
-| *access_control_allow_headers*     | text | Defines the use of custom Access-Control-Allow-Headers of endpoints                                                   | *              |
+| *source_dir*                       | text | Sets the path, starting from the project root, of the generated OpenAPI lambda files, by default it is src.           | src            |
+| *access_control_allow_origin*      | text | Defines the use of custom Access-Control-Allow-Origin of endpoints.                                                   | *              |
+| *access_control_allow_headers*     | text | Defines the use of custom Access-Control-Allow-Headers of endpoints.                                                  | *              |
 | *access_control_allow_methods*     | text | Defines the use of custom Access-Control-Allow-Methods of endpoints.                                                  | *              |
 | *access_control_allow_credentials* | text | Defines the use of custom Access-Control-Allow-Credentials of endpoints.                                              | *              |
 
